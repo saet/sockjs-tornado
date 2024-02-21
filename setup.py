@@ -20,13 +20,13 @@ def desc():
 
 setup(
     name='sockjs-tornado',
-    version='1.0.7',
+    version='2.0.0',
     author='Serge S. Koval',
     author_email='serge.koval@gmail.com',
     packages=['sockjs', 'sockjs.tornado', 'sockjs.tornado.transports'],
     namespace_packages=['sockjs'],
     scripts=[],
-    url='http://github.com/mrjoes/sockjs-tornado/',
+    url='https://github.com/saet/sockjs-tornado',
     license='MIT License',
     description='SockJS python server implementation on top of Tornado framework',
     long_description=desc(),
@@ -43,6 +43,6 @@ setup(
     ],
     requires=['tornado'],
     install_requires=[
-        'tornado >= 4.0.0'
+        'tornado >= 6.4.0'
     ]
 )
