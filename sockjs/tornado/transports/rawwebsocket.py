@@ -8,6 +8,8 @@
 import logging
 import socket
 
+from tornado.websocket import WebSocketClosedError
+
 from sockjs.tornado import websocket, session
 from sockjs.tornado.transports import base
 
@@ -78,7 +80,7 @@ class RawWebSocketTransport(websocket.SockJSWebSocketHandler, base.BaseTransport
         # Send message
         try:
             self.write_message(message, binary)
-        except IOError:
+        except (IOError, WebSocketClosedError):
             self.server.io_loop.add_callback(self.on_close)
 
     def session_closed(self):
