@@ -38,6 +38,6 @@ setup(
     ],
     requires=['tornado'],
     install_requires=[
-        'tornado >= 6.4.0'
+        'tornado >= 6.0.0'
     ]
 )
