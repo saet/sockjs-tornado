@@ -20,7 +20,7 @@ def desc():
 
 setup(
     name='saet-sockjs-tornado',
-    version='2.0.0',
+    version='2.0.1',
     author='Serge S. Koval',
     author_email='serge.koval@gmail.com',
     packages=['sockjs', 'sockjs.tornado', 'sockjs.tornado.transports'],
