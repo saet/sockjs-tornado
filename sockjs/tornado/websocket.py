@@ -1,11 +1,16 @@
+import logging
+
 import tornado
 from tornado import escape, gen, websocket
+
+
 
 try:
     from urllib.parse import urlparse # py3
 except ImportError:
     from urlparse import urlparse # py2
 
+LOG = logging.getLogger()
 
 class SockJSWebSocketHandler(websocket.WebSocketHandler):
     if tornado.version_info[0] == 4 and tornado.version_info[1] > 1:
@@ -35,7 +40,7 @@ class SockJSWebSocketHandler(websocket.WebSocketHandler):
 
     
     async def _execute(self, transforms, *args, **kwargs):
-        print(f"{self._auto_finish = }")
+        LOG.debug(f"_execute {self._auto_finish = }")
         self._transforms = transforms
         # Websocket only supports GET method
         if self.request.method != "GET":
