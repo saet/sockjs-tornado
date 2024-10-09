@@ -35,6 +35,7 @@ class SockJSWebSocketHandler(websocket.WebSocketHandler):
 
     
     async def _execute(self, transforms, *args, **kwargs):
+        print(f"{self._auto_finish = }")
         self._transforms = transforms
         # Websocket only supports GET method
         if self.request.method != "GET":
