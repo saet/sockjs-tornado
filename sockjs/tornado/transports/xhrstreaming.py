@@ -14,8 +14,7 @@ from sockjs.tornado.transports import streamingbase
 class XhrStreamingTransport(streamingbase.StreamingTransportBase):
     name = 'xhr_streaming'
 
-    @asynchronous
-    def post(self, session_id):
+    async def post(self, session_id):
         # Handle cookie
         self.preflight()
         self.handle_session_cookie()
@@ -27,7 +26,6 @@ class XhrStreamingTransport(streamingbase.StreamingTransportBase):
         self.flush()
 
         if not self._attach_session(session_id, False):
-            self.finish()
             return
 
         if self.session:

@@ -18,8 +18,7 @@ LOG = logging.getLogger("tornado.general")
 class JSONPTransport(pollingbase.PollingTransportBase):
     name = 'jsonp'
 
-    @asynchronous
-    def get(self, session_id):
+    async def get(self, session_id):
         # Start response
         self.handle_session_cookie()
         self.disable_cache()
@@ -29,7 +28,6 @@ class JSONPTransport(pollingbase.PollingTransportBase):
         if not self.callback:
             self.write('"callback" parameter required')
             self.set_status(500)
-            self.finish()
             return
 
         # Get or create session without starting heartbeat

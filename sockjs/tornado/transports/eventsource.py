@@ -14,8 +14,8 @@ from sockjs.tornado.transports import streamingbase
 class EventSourceTransport(streamingbase.StreamingTransportBase):
     name = 'eventsource'
 
-    @asynchronous
-    def get(self, session_id):
+    
+    async def get(self, session_id):
         # Start response
         self.preflight()
         self.handle_session_cookie()
@@ -26,7 +26,6 @@ class EventSourceTransport(streamingbase.StreamingTransportBase):
         self.flush()
 
         if not self._attach_session(session_id):
-            self.finish()
             return
 
         if self.session:

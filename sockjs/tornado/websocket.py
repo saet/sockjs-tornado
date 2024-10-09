@@ -33,8 +33,8 @@ class SockJSWebSocketHandler(websocket.WebSocketHandler):
         if self.ws_connection:
             self.ws_connection._abort()
 
-    @gen.coroutine
-    def _execute(self, transforms, *args, **kwargs):
+    
+    async def _execute(self, transforms, *args, **kwargs):
         self._transforms = transforms
         # Websocket only supports GET method
         if self.request.method != "GET":
@@ -61,4 +61,4 @@ class SockJSWebSocketHandler(websocket.WebSocketHandler):
             self.finish("\"Connection\" must be \"Upgrade\".")
             return
 
-        yield super(SockJSWebSocketHandler, self)._execute(transforms, *args, **kwargs)
+        await super(SockJSWebSocketHandler, self)._execute(transforms, *args, **kwargs)

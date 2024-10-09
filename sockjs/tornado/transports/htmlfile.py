@@ -48,8 +48,8 @@ class HtmlFileTransport(streamingbase.StreamingTransportBase):
     def initialize(self, server):
         super(HtmlFileTransport, self).initialize(server)
 
-    @asynchronous
-    def get(self, session_id):
+    
+    async def get(self, session_id):
         # Start response
         self.preflight()
         self.handle_session_cookie()
@@ -61,13 +61,11 @@ class HtmlFileTransport(streamingbase.StreamingTransportBase):
         if not callback:
             self.write('"callback" parameter required')
             self.set_status(500)
-            self.finish()
             return
 
         if CALLBACK_RE.search(callback):
             self.write('invalid "callback" parameter')
             self.set_status(500)
-            self.finish()
             return
 
         # TODO: Fix me - use parameter
@@ -76,7 +74,6 @@ class HtmlFileTransport(streamingbase.StreamingTransportBase):
 
         # Now try to attach to session
         if not self._attach_session(session_id):
-            self.finish()
             return
 
         # Flush any pending messages
