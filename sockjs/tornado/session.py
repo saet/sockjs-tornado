@@ -109,7 +109,7 @@ class BaseSession(object):
         if self.state == CONNECTING:
             self.state = OPEN
 
-            await self.conn.on_open(self.conn_info)
+            return await self.conn.on_open(self.conn_info)
 
     def remove_handler(self, handler):
         """Remove active handler from the session
@@ -291,14 +291,14 @@ class Session(BaseSession, sessioncontainer.SessionMixin):
 
         return True
 
-    def verify_state(self):
+    async def verify_state(self):
         """Verify if session was not yet opened. If it is, open it and call connections `on_open`"""
         # If we're in CONNECTING state - send 'o' message to the client
         if self.state == CONNECTING:
             self.handler.send_pack(proto.CONNECT)
 
         # Call parent implementation
-        super(Session, self).verify_state()
+        await super(Session, self).verify_state()
 
     def remove_handler(self, handler):
         """Detach active handler from the session
