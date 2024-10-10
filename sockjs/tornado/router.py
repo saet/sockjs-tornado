@@ -5,11 +5,13 @@
 
     SockJS protocol router implementation.
 """
+import logging
 
 from tornado import ioloop, version_info
 
 from sockjs.tornado import transports, session, sessioncontainer, static, stats, proto
 
+LOG = logging.getLogger("tornado.general")
 
 DEFAULT_SETTINGS = {
     # Sessions check interval in seconds
@@ -146,6 +148,7 @@ class SockJSRouter(object):
         return routes
 
     def create_session(self, session_id, register=True):
+        LOG.debug(f"SockJSRouter.create_session: {session_id = } - {register = } - {len(self._sessions._items) = } - {len(self._sessions._queue) = }")
         """Creates new session object and returns it.
 
         `request`
