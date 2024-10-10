@@ -49,6 +49,7 @@ class WebSocketTransport(websocket.SockJSWebSocketHandler, base.BaseTransportMix
             self.session.flush()
 
     def _detach(self):
+        LOG.debug(f"WebSocketTransport._detach: {self.session = }")
         if self.session is not None:
             self.session.remove_handler(self)
             self.session = None
