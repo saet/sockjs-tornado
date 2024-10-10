@@ -25,7 +25,7 @@ class WebSocketTransport(websocket.SockJSWebSocketHandler, base.BaseTransportMix
         self.session = None
         self.active = True
 
-    def open(self, session_id):
+    async def open(self, session_id):
         # Stats
         self.server.stats.on_conn_opened()
 
@@ -37,13 +37,13 @@ class WebSocketTransport(websocket.SockJSWebSocketHandler, base.BaseTransportMix
                 self.stream.set_nodelay(True)
 
         # Handle session
-        self.session = self.server.create_session(session_id, register=False)
+        self.session = await self.server.create_session(session_id, register=False)
 
         if not self.session.set_handler(self):
             self.close()
             return
 
-        self.session.verify_state()
+        await self.session.verify_state()
 
         if self.session:
             self.session.flush()

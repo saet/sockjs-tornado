@@ -104,12 +104,12 @@ class BaseSession(object):
 
         return True
 
-    def verify_state(self):
+    async def verify_state(self):
         """Verify if session was not yet opened. If it is, open it and call connections `on_open`"""
         if self.state == CONNECTING:
             self.state = OPEN
 
-            self.conn.on_open(self.conn_info)
+            await self.conn.on_open(self.conn_info)
 
     def remove_handler(self, handler):
         """Remove active handler from the session

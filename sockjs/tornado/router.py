@@ -147,7 +147,7 @@ class SockJSRouter(object):
         routes.extend(self._transport_urls)
         return routes
 
-    def create_session(self, session_id, register=True):
+    async def create_session(self, session_id, register=True):
         LOG.debug(f"SockJSRouter.create_session: {session_id = } - {register = } - {len(self._sessions._items) = } - {len(self._sessions._queue) = }")
         """Creates new session object and returns it.
 
