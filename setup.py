@@ -33,7 +33,7 @@ setup(
     long_description_content_type='text/x-rst',
     classifiers=[
         'License :: OSI Approved :: MIT License',
-        'Programming Language :: Python :: 3.11',
+        'Programming Language :: Python :: 3.6',
         'Programming Language :: Python :: Implementation :: CPython',
     ],
     requires=['tornado'],
